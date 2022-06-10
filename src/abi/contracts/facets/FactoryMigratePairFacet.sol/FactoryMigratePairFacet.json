@@ -1,0 +1,4 @@
+[
+  "function migratePair(address,address,address)",
+  "function removePair(address)"
+]

@@ -1,0 +1,4 @@
+[
+  "event PairCreated(address indexed,address indexed,address,uint256)",
+  "function createPair(address,address,uint256,uint256,address) returns (address)"
+]
