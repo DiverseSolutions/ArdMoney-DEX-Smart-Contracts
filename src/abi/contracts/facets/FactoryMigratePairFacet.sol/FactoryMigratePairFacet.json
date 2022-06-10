@@ -1,4 +1,6 @@
 [
+  "event PairMigrated(address indexed,address indexed,address,uint256)",
+  "event PairRemoved(address,uint256)",
   "function migratePair(address,address,address)",
   "function removePair(address)"
 ]

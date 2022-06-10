@@ -1,0 +1,5 @@
+[
+  "function setFeeTo(address)",
+  "function setFeeToSetter(address)",
+  "function setMigrator(address)"
+]

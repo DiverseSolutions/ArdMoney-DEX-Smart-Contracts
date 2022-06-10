@@ -13,6 +13,7 @@ import { IDiamondLoupe } from "../interfaces/IDiamondLoupe.sol";
 import { IDiamondCut } from "../interfaces/IDiamondCut.sol";
 import { IERC173 } from "../interfaces/IERC173.sol";
 import { IERC165 } from "../interfaces/IERC165.sol";
+import { IAccessControl } from "../interfaces/IAccessControl.sol";
 
 import "../storage/FactoryDiamondStorage.sol";
 
@@ -32,10 +33,10 @@ contract FactoryDiamondInit {
     ds.supportedInterfaces[type(IDiamondCut).interfaceId] = true;
     ds.supportedInterfaces[type(IDiamondLoupe).interfaceId] = true;
     ds.supportedInterfaces[type(IERC173).interfaceId] = true;
+    ds.supportedInterfaces[type(IAccessControl).interfaceId] = true;
 
     s.feeToSetter = _feeToSetter;
     s.paused = false;
-    s.CREATE_BASIC_PAIR_ROLE = keccak256("CREATE_BASIC_PAIR_ROLE");
     s.roles[keccak256("CREATE_BASIC_PAIR_ROLE")].members[msg.sender] = true;
 
     // add your own state variables 

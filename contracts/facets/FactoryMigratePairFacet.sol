@@ -7,6 +7,9 @@ import { LibDiamond } from "../libraries/LibDiamond.sol";
 contract FactoryMigratePairFacet {
   FactoryDiamondStorage internal s;
 
+  event PairMigrated( address indexed token0, address indexed token1, address pair, uint256);
+  event PairRemoved( address pair, uint256);
+
   function migratePair(address token0,address token1,address newPair) external {
     require(token0 != address(0), "TOKEN0 ZERO ADDRESS");
     require(token1 != address(0), "TOKEN0 ZERO ADDRESS");
@@ -15,6 +18,8 @@ contract FactoryMigratePairFacet {
     s.getPair[token0][token1] = newPair;
     s.getPair[token1][token0] = newPair;
     s.allPairs.push(newPair);
+
+    emit PairMigrated(token0, token1, newPair, s.allPairs.length);
   }
 
   function removePair(address pair) external {
@@ -39,6 +44,7 @@ contract FactoryMigratePairFacet {
     }
 
     s.allPairs.pop();
+    emit PairRemoved(pair, s.allPairs.length);
   }
 
 }

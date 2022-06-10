@@ -8,7 +8,7 @@ const {
 describe("ArdMoney Factory Diamond", function () {
   let owner,feeSetter,pairAdmin;
 
-  let factoryDiamond,createPairFacet,factoryUtilityFacet,pausibleFacet,accessControlFacet,migratePairFacet;
+  let factoryDiamond,createPairFacet,factoryUtilityFacet,pausibleFacet,accessControlFacet,migratePairFacet,factoryAdminFacet;
   let token0,token1;
 
   this.beforeEach(async function () {
@@ -21,6 +21,7 @@ describe("ArdMoney Factory Diamond", function () {
       pausibleFacet,
       accessControlFacet,
       migratePairFacet,
+      factoryAdminFacet
     ] = await initializeArdMoneyFactoryDiamond(owner,feeSetter);
 
     [token0,token1] = await initializeDummyTokens()

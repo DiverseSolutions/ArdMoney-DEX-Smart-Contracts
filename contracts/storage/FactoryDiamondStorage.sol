@@ -11,7 +11,6 @@ struct FactoryDiamondStorage {
   bool paused;
 
   mapping(bytes32 => RoleData) roles;
-  bytes32 CREATE_BASIC_PAIR_ROLE;
 }
 
 struct RoleData {

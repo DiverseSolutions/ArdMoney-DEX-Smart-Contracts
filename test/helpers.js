@@ -22,7 +22,8 @@ async function initializeArdMoneyFactoryDiamond(contractOwner,feeSetter){
     'FactoryUtilityFacet',
     'FactoryPausibleFacet',
     'FactoryAccessControlFacet',
-    'FactoryMigratePairFacet'
+    'FactoryMigratePairFacet',
+    'FactoryAdminFacet'
   ]
   const cut = []
   for (let FacetName of FacetNames) {
@@ -48,6 +49,7 @@ async function initializeArdMoneyFactoryDiamond(contractOwner,feeSetter){
 
   const accessControlFacet = await ethers.getContractAt('FactoryAccessControlFacet', ardMoneyFactoryDiamond.address)
   const migratePairFacet = await ethers.getContractAt('FactoryMigratePairFacet', ardMoneyFactoryDiamond.address)
+  const factoryAdminFacet = await ethers.getContractAt('FactoryAdminFacet', ardMoneyFactoryDiamond.address)
 
   return [ 
     ardMoneyFactoryDiamond, 
@@ -56,7 +58,8 @@ async function initializeArdMoneyFactoryDiamond(contractOwner,feeSetter){
     factoryPausibleFacet,
 
     accessControlFacet,
-    migratePairFacet
+    migratePairFacet,
+    factoryAdminFacet,
   ] 
 }
 
