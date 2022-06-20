@@ -2,6 +2,58 @@ const { ethers } = require("hardhat");
 const { expect } = require("chai");
 const { getSelectors, FacetCutAction } = require('../diamond-helpers')
 
+async function initializeArdMoneyRouterDiamond(contractOwner,factoryAddress,wETHAddress){
+  const DiamondCutFacet = await ethers.getContractFactory('DiamondCutFacet')
+  const diamondCutFacet = await DiamondCutFacet.deploy()
+  await diamondCutFacet.deployed()
+
+  const ArdMoneyRouterDiamond = await ethers.getContractFactory("ArdMoneyRouterDiamond");
+  const ardMoneyRouterDiamond = await ArdMoneyRouterDiamond.deploy(contractOwner.address,diamondCutFacet.address);
+  await ardMoneyRouterDiamond.deployed();
+
+  const RouterDiamondInit = await ethers.getContractFactory('RouterDiamondInit')
+  const routerDiamondInit = await RouterDiamondInit.deploy()
+  await routerDiamondInit.deployed()
+
+  const FacetNames = [
+    'DiamondLoupeFacet',
+    'OwnershipFacet',
+    'RouterLiquidityFacet',
+    'RouterSwapFacet',
+    'RouterUtilityFacet',
+  ]
+  const cut = []
+  for (let FacetName of FacetNames) {
+    const Facet = await ethers.getContractFactory(FacetName)
+    const facet = await Facet.deploy()
+    await facet.deployed()
+
+    cut.push({
+      facetAddress: facet.address,
+      action: FacetCutAction.Add,
+      functionSelectors: getSelectors(facet)
+    })
+  }
+
+  const diamondCut = await ethers.getContractAt('IDiamondCut', ardMoneyRouterDiamond.address)
+
+  let functionCall = routerDiamondInit.interface.encodeFunctionData('init',[factoryAddress,wETHAddress])
+  await (await diamondCut.diamondCut(cut, routerDiamondInit.address, functionCall)).wait()
+
+  const routerSwapFacet = await ethers.getContractAt('RouterSwapFacet', ardMoneyRouterDiamond.address)
+  const routerLiquidityFacet = await ethers.getContractAt('RouterLiquidityFacet', ardMoneyRouterDiamond.address)
+  const routerUtilityFacet = await ethers.getContractAt('RouterUtilityFacet', ardMoneyRouterDiamond.address)
+
+  return [ 
+    ardMoneyRouterDiamond,
+    
+    routerSwapFacet,
+    routerLiquidityFacet,
+    routerUtilityFacet,
+  ] 
+
+}
+
 async function initializeArdMoneyFactoryDiamond(contractOwner,feeSetter){
   const DiamondCutFacet = await ethers.getContractFactory('DiamondCutFacet')
   const diamondCutFacet = await DiamondCutFacet.deploy()
@@ -127,6 +179,7 @@ async function tokenMint(token,amount,to,owner){
 
 module.exports = {
   initializeArdMoneyFactoryDiamond,
+  initializeArdMoneyRouterDiamond,
 
   initializeDummyTokens,
   initializeArdMoneyContracts,

@@ -1,0 +1,11 @@
+[
+  "function swapETHForExactTokens(uint256,address[],address,uint256) payable returns (uint256[])",
+  "function swapExactETHForTokens(uint256,address[],address,uint256) payable returns (uint256[])",
+  "function swapExactETHForTokensSupportingFeeOnTransferTokens(uint256,address[],address,uint256) payable",
+  "function swapExactTokensForETH(uint256,uint256,address[],address,uint256) returns (uint256[])",
+  "function swapExactTokensForETHSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+  "function swapExactTokensForTokens(uint256,uint256,address[],address,uint256) returns (uint256[])",
+  "function swapExactTokensForTokensSupportingFeeOnTransferTokens(uint256,uint256,address[],address,uint256)",
+  "function swapTokensForExactETH(uint256,uint256,address[],address,uint256) returns (uint256[])",
+  "function swapTokensForExactTokens(uint256,uint256,address[],address,uint256) returns (uint256[])"
+]

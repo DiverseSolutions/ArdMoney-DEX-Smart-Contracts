@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.5.0;
+import "hardhat/console.sol";
 
 import "../interfaces/IArdMoneyPair.sol";
 import "../interfaces/IArdMoneyFactory.sol";
@@ -142,6 +143,8 @@ library ArdMoneyLibrary {
                 path[i]
             );
             uint256 swapFee =  IArdMoneyPair(pairFor(factory, path[i - 1], path[i])).getSwapFee();
+            console.log("swaq fee");
+            console.log(swapFee);
             amounts[i - 1] = getAmountIn(amounts[i], reserveIn, reserveOut, swapFee);
         }
     }

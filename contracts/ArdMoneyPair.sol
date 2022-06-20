@@ -321,14 +321,17 @@ contract ArdMoneyPair is ArdMoneyLpERC20 {
         return admin;
     }
 
+    function getSwapFee() public view returns(uint256) {
+      return swapFee;
+    }
+
+    function getProtocolFee() public view returns(uint256) {
+      return protocolFee;
+    }
+
     function setAdmin(address _admin)  external {
         require(msg.sender == admin, "NOT ADMIN");
         admin = _admin;
-    }
-
-    function setSwapFee(uint256 _swapFee) external {
-        require(msg.sender == admin, "NOT ADMIN");
-        swapFee = _swapFee;
     }
 
     function setProtocolFee(uint256 __protocolFee) external {

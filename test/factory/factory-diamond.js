@@ -6,13 +6,13 @@ const {
 } = require('../helpers.js');
 
 describe("ArdMoney Factory Diamond", function () {
-  let owner,feeSetter,pairAdmin;
+  let owner,feeSetter,pairAdmin,odko,amaraa;
 
   let factoryDiamond,createPairFacet,factoryUtilityFacet,pausibleFacet,accessControlFacet,migratePairFacet,factoryAdminFacet;
   let token0,token1;
 
   this.beforeEach(async function () {
-    [owner,feeSetter,pairAdmin] = await ethers.getSigners();
+    [owner,feeSetter,pairAdmin,odko,amaraa] = await ethers.getSigners();
 
     [
       factoryDiamond,
@@ -26,8 +26,6 @@ describe("ArdMoney Factory Diamond", function () {
 
     [token0,token1] = await initializeDummyTokens()
   });
-
-
 
 
 
@@ -45,8 +43,6 @@ describe("ArdMoney Factory Diamond", function () {
 
 
 
-
-
   it("Testing Factory Pausible Facet", async function () {
     await pausibleFacet.pause();
     await expect(createPairFacet.createPair(token0.address,token1.address,3,3,pairAdmin.address))
@@ -54,8 +50,6 @@ describe("ArdMoney Factory Diamond", function () {
 
     expect(await pausibleFacet.paused()).to.equal(true);
   });
-
-
 
 
 
@@ -70,10 +64,6 @@ describe("ArdMoney Factory Diamond", function () {
 
     expect(await factoryUtilityFacet.allPairsLength()).to.equal(0);
   });
-
-
-
-
 
 });
 

@@ -1,0 +1,10 @@
+[
+  "function addLiquidity(address,address,uint256,uint256,uint256,uint256,address,uint256) returns (uint256, uint256, uint256)",
+  "function addLiquidityETH(address,uint256,uint256,uint256,address,uint256) payable returns (uint256, uint256, uint256)",
+  "function removeLiquidity(address,address,uint256,uint256,uint256,address,uint256) returns (uint256, uint256)",
+  "function removeLiquidityETH(address,uint256,uint256,uint256,address,uint256) returns (uint256, uint256)",
+  "function removeLiquidityETHSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256) returns (uint256)",
+  "function removeLiquidityETHWithPermit(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32) returns (uint256, uint256)",
+  "function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32) returns (uint256)",
+  "function removeLiquidityWithPermit(address,address,uint256,uint256,uint256,address,uint256,bool,uint8,bytes32,bytes32) returns (uint256, uint256)"
+]

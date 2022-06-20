@@ -17,16 +17,14 @@ contract ArdMoneyRouter is IArdMoneyRouter02 {
 
     address public immutable override factory;
     address public immutable override WETH;
-    address admin;
     modifier ensure(uint256 deadline) {
         require(deadline >= block.timestamp, "EXPIRED");
         _;
     }
 
-    constructor(address _factory, address _WETH, address _admin, uint _swapFee, uint _mintFee) public {
+    constructor(address _factory, address _WETH) public {
         factory = _factory;
         WETH = _WETH;
-        admin = _admin;
     }
 
     receive() external payable {
@@ -43,9 +41,7 @@ contract ArdMoneyRouter is IArdMoneyRouter02 {
         uint256 amountBMin
     ) internal virtual returns (uint256 amountA, uint256 amountB) {
         // create the pair if it doesn't exist yet
-        if (IArdMoneyFactory(factory).getPair(tokenA, tokenB) == address(0)) {
-            IArdMoneyFactory(factory).createPair(tokenA, tokenB, 200, 200, admin);
-        }
+        require(IArdMoneyFactory(factory).getPair(tokenA, tokenB) != address(0),"PAIR DOESN'T EXIST");
         (uint256 reserveA, uint256 reserveB) = ArdMoneyLibrary.getReserves(
             factory,
             tokenA,
