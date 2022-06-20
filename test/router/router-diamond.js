@@ -75,16 +75,6 @@ describe("ArdMoney Router Diamond", function () {
 
 
   it("Router - ExactTokensForTokens Swap", async function () {
-    // 100% == 1000 || 3% == 30 || 0.3% == 3
-    let swapFee = 3;
-    let protocolFee = 3;
-
-    let tx = await createPairFacet.createPair(token0.address,token1.address,swapFee,protocolFee,pairAdmin.address);
-    let receipt = await tx.wait()
-
-    expect(receipt.events.find((i) => i.event == 'PairCreated') != undefined).to.equal(true);
-    expect(await factoryUtilityFacet.allPairsLength()).to.equal(1);
-
     await tokenMint(token0,'2000',odko.address,owner)
     await tokenMint(token1,'2000',odko.address,owner)
 

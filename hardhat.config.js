@@ -8,6 +8,8 @@ require('hardhat-docgen');
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
 
+require("hardhat-gas-reporter");
+
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -155,5 +157,9 @@ module.exports = {
       avalancheFujiTestnet: process.env.FUJI_TESTNET_ETHERSCAN_API_KEY,
 
     }
+  },
+  gasReporter: {
+    token: 'MATIC',
+    // gasPrice: 21
   }
 };
